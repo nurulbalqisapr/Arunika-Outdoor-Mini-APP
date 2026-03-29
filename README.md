@@ -45,6 +45,17 @@ The system uses SQLite database integrated with Flask-SQLAlchemy.
 
 ---
 
+## How the System Works
+
+The overall workflow is quite straightforward:
+
+A user opens the application
+Logs in or registers
+Gets redirected based on their role
+Performs actions from their respective menu
+
+Admins manage the system behind the scenes, while renters interact with the rental process directly.
+
 ## Project Structure
 
 ```
@@ -78,6 +89,9 @@ Admin Menu
 
 Renter Menu
 <img width="3554" height="2550" alt="renter menu" src="https://github.com/user-attachments/assets/a77d6112-52e9-4553-baf6-5d5018770f91" />
+
+---
+
 
 
 
