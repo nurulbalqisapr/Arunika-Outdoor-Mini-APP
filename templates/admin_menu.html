@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <title>Admin Menu - Arunika Outdoor</title>
+
+  <style>
+/* BODY & BACKGROUND */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(rgba(255, 248, 240, 0.2), rgba(200, 170, 130, 0.2)),
+    url("{{ url_for('static', filename='img/arunika.jpg') }}");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* HEADER DI ATAS */
+.header-title {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.header-title h1 {
+  font-size: 48px;
+  margin: 0;
+  color: #8B5E3C;
+}
+
+.header-title p {
+  font-size: 24px;
+  margin: 5px 0 0;
+  color: #A67B5B;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* CARD DI TENGAH */
+.menu-container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 248, 240, 0.92);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+
+  margin: auto; /* center secara vertikal & horizontal */
+}
+
+/* TITLE DI CARD */
+.menu-container h2 {
+  margin-bottom: 25px;
+  color: #8B5E3C;
+}
+
+/* TOMBOL */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Equipment & Rents tombol - hijau sage */
+.btn-action {
+  background: linear-gradient(135deg, #A3C293, #7DA77E);
+}
+
+.btn-action:hover {
+  transform: scale(1.03);
+}
+
+/* Logout tombol - coklat login */
+.btn-logout {
+  background: linear-gradient(135deg, #A0522D, #8B4513);
+}
+
+.btn-logout:hover {
+  transform: scale(1.03);
+}
+
+/* HR optional */
+hr {
+  border: none;
+  height: 1px;
+  background: #A67B5B;
+  margin: 15px 0 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .menu-container {
+    max-width: 340px;
+    padding: 25px;
+  }
+
+  .header-title h1 {
+    font-size: 34px;
+  }
+
+  .header-title p {
+    font-size: 18px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER DI ATAS (tetap di posisi atas layar) -->
+<div class="header-title">
+  <h1>ARUNIKA OUTDOOR</h1>
+  <p>Explore the peaks, gear up with us!</p>
+</div>
+
+<!-- CARD DI TENGAH -->
+<div class="menu-container">
+  <h2>Admin Menu</h2>
+
+  <form action="/admin/equipment" method="get">
+    <button type="submit" class="btn-action">[1] Equipment Management</button>
+  </form>
+
+  <form action="/admin/rents" method="get">
+    <button type="submit" class="btn-action">[2] Rents Management</button>
+  </form>
+
+  <form action="/" method="get">
+    <button type="submit" class="btn-logout">[0] Logout</button>
+  </form>
+</div>
+
+</body>
+</html>

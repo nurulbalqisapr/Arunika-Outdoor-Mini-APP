@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+  <title>Update Rental - Arunika Outdoor</title>
+  <style>
+    /* BODY & BACKGROUND */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      background:
+        linear-gradient(rgba(255, 248, 240, 0.2), rgba(200, 170, 130, 0.2)),
+        url("{{ url_for('static', filename='img/arunika.jpg') }}");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* HEADER */
+    .header-title {
+      position: absolute;
+      top: 40px;
+      width: 100%;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .header-title h1 {
+      font-size: 48px;
+      margin: 0;
+      color: #8B5E3C;
+    }
+
+    .header-title p {
+      font-size: 20px;
+      margin: 5px 0 0;
+      color: #A67B5B;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* CARD TENGAH */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 248, 240, 0.92);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      margin: auto;
+    }
+
+    h2, h3 {
+      color: #8B5E3C;
+      margin-bottom: 20px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #A67B5B;
+      margin: 15px 0 20px;
+    }
+
+    /* FORM */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* TOMBOL */
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      background: linear-gradient(135deg, #A3C293, #7DA77E); /* hijau */
+    }
+
+    button:hover {
+      transform: scale(1.03);
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: white;
+      background:  #333;
+      transition: 0.3s;
+    }
+
+    .btn-back:hover {
+      transform: scale(1.03);
+    }
+
+    /* ALERTS */
+    .error {
+      color: red;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .info, .confirm {
+      background-color: rgba(231, 243, 254, 0.9);
+      padding: 12px;
+      border-left: 6px solid #2196f3;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #7DA77E;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .container {
+        max-width: 100%;
+        padding: 25px;
+      }
+      .header-title h1 {
+        font-size: 34px;
+      }
+      .header-title p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header-title">
+  <h1>✏️ UPDATE RENTAL</h1>
+  <p>Modify your active rental</p>
+</div>
+
+<!-- CARD -->
+<div class="container">
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  {% if target_trans %}
+    <h3>Updating Rental: {{ target_trans.kode_barang }}</h3>
+    <form action="/user/rental/update" method="post">
+      <input type="hidden" name="id_transaksi" value="{{ target_trans.id_transaksi }}">
+      <input type="hidden" name="kode_barang" value="{{ target_trans.kode_barang }}">
+
+      <div class="form-group">
+        <label>New Quantity (Current: {{ target_trans.jumlah }}):</label>
+        <input type="number" name="new_jumlah" value="{{ target_trans.jumlah }}" min="1" required>
+      </div>
+
+      <div class="form-group">
+        <label>New Duration (Current: {{ target_trans.lama_sewa }} days):</label>
+        <input type="number" name="new_lama" value="{{ target_trans.lama_sewa }}" min="1" required>
+      </div>
+
+      <button type="submit" name="action" value="save">Save Changes</button>
+      <a href="/user/rental/update" class="btn-back" style="background:#A0522D; margin-top:10px;">Cancel</a>
+    </form>
+  {% else %}
+    {% if active_rentals %}
+      <h3>Your Active Rentals</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Qty</th>
+            <th>Days</th>
+            <th>Total (Rp)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in active_rentals %}
+          <tr>
+            <td>{{ t.kode_barang }}</td>
+            <td>{{ t.jumlah }}</td>
+            <td>{{ t.lama_sewa }}</td>
+            <td>{{ "{:,.0f}".format(t.total_harga) }}</td>
+            <td>
+              <form action="/user/rental/update" method="post" style="display: inline">
+                <input type="hidden" name="id_transaksi" value="{{ t.id_transaksi }}">
+                <input type="hidden" name="kode_barang" value="{{ t.kode_barang }}">
+                <button type="submit" name="action" value="edit">Edit</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>⚠️ You do not have any rental data to update.</p>
+    {% endif %}
+  {% endif %}
+
+  <br>
+  <a href="/user" class="btn-back">Back</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Equipment List - Arunika Outdoor</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background:
+          linear-gradient(rgba(255, 248, 240, 0.2), rgba(200, 170, 130, 0.2)),
+          url("{{ url_for('static', filename='img/arunika.jpg') }}");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1000px;
+        background: rgba(255, 248, 240, 0.92);
+        backdrop-filter: blur(6px);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      }
+
+      .header {
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        color: #8B5E3C;
+      }
+      .header h3 {
+        margin: 5px 0 20px;
+        color: #A67B5B;
+        font-weight: 400;
+      }
+
+      hr {
+        border: none;
+        height: 1px;
+        background: #A67B5B;
+        margin: 15px 0 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background: #7DA77E;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      form input[type="text"] {
+        width: calc(100% - 110px);
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      form button {
+        padding: 9px 15px;
+        border-radius: 8px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        background: linear-gradient(135deg, #A3C293, #7DA77E);
+        transition: 0.3s;
+      }
+
+      form button:hover {
+        transform: scale(1.03);
+      }
+
+      .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        color: white;
+        background:  #333;
+        transition: 0.3s;
+      }
+      .btn-back:hover {
+        transform: scale(1.03);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>ARUNIKA OUTDOOR</h1>
+        <h3>RENTAL EQUIPMENT LIST • 1 DAY</h3>
+      </div>
+      <hr />
+
+      <form action="/user/equipment" method="get" style="display:flex; gap:5px; flex-wrap: wrap;">
+        <input type="text" name="search" placeholder="Search by code..." value="{{ search_query }}" />
+        <button type="submit">Search</button>
+        <a href="/user/equipment" class="btn-back" style="margin-left:auto;">Clear</a>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Equipment Type</th>
+            <th>Equipment Name</th>
+            <th>Price (Rp)</th>
+            <th>Stock (pcs)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in equipments %}
+          <tr>
+            <td>{{ item.kode }}</td>
+            <td>{{ item.jenis }}</td>
+            <td>{{ item.nama }}</td>
+            <td>{{ "{:,.0f}".format(item.harga) }}</td>
+            <td>{{ item.stok }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" style="text-align: center">No equipment found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if role == "admin" %}
+      <a href="/admin/equipment" class="btn-back">Back</a>
+      {% else %}
+      <a href="/user" class="btn-back">Back</a>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login - Arunika Outdoor</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+
+  /* 🔥 penting buat HP */
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  /* 🔥 BACKGROUND ADAPTIVE */
+  background:
+    linear-gradient(rgba(255,240,220,0.2), rgba(200,170,130,0.3)),
+    url("{{ url_for('static', filename='img/arunika.jpg') }}");
+
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+
+  /* optional biar smooth di desktop */
+  background-attachment: fixed;
+}
+
+/* HEADER */
+.header-title{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  padding:0 10px; /* biar ga kepotong di HP */
+}
+
+.header-title h2{
+  margin:0;
+  font-weight:400;
+  letter-spacing:4px;
+  font-size:24px;  
+  color:#A67B5B;
+}
+
+.header-title h1{
+  margin:0;
+  font-size:56px;  
+  letter-spacing:6px;
+  color:#8B5E3C;
+}
+
+/* LOGIN CARD */
+.container{
+  background: rgba(255, 248, 240, 0.92);
+  backdrop-filter: blur(6px);
+
+  padding:40px;
+  border-radius:16px;
+  width:320px;
+  text-align:center;
+
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* TITLE */
+.container h1{
+  color:#8B5E3C;
+  margin-bottom:20px;
+}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:12px;
+  background: linear-gradient(135deg, #A0522D, #8B4513);
+  color:white;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background: linear-gradient(135deg, #8B4513, #6B3E26);
+  transform:scale(1.03);
+}
+
+/* LINK */
+.link{
+  margin-top:15px;
+  font-size:14px;
+}
+
+.link a{
+  color:#8B4513;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* ERROR */
+.error{
+  color:#d32f2f;
+  margin-bottom:10px;
+}
+
+/* 🔥 MOBILE FIX */
+@media (max-width: 600px){
+
+  body{
+    padding:20px;
+    align-items:flex-start; /* biar turun dikit */
+  }
+
+  .header-title{
+    top:20px;
+  }
+
+  .header-title h1{
+    font-size:34px;
+    letter-spacing:3px;
+  }
+
+  .header-title h2{
+    font-size:16px;
+  }
+
+  .container{
+    width:100%;
+    max-width:340px;
+    padding:25px;
+    margin-top:120px; /* biar ga nabrak header */
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header-title">
+  <h2>WELCOME TO</h2>
+  <h1>ARUNIKA OUTDOOR</h1>
+  <h2 style="margin-top:8px; font-weight:400; letter-spacing:4px; font-size:22px; color:#A67B5B;">
+    Explore the peaks, gear up with us!
+  </h2>
+</div>
+
+<!-- LOGIN -->
+<div class="container">
+
+<h1>Login</h1>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+<input name="userid" placeholder="UserID" required>
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Login</button>
+</form>
+
+<div class="link">
+Don't have an account?
+<a href="{{ url_for('register_route') }}">Register</a>
+</div>
+
+</div>
+
+</body>
+</html>

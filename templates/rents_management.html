@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+<head>
+  <title>Rents Management - Arunika Outdoor</title>
+  <style>
+/* BODY & BACKGROUND */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background:
+    linear-gradient(rgba(255, 248, 240, 0.2), rgba(200, 170, 130, 0.2)),
+    url("{{ url_for('static', filename='img/arunika.jpg') }}");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* HEADER ATAS */
+.header-title {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.header-title h1 {
+  font-size: 48px;
+  margin: 0;
+  color: #8B5E3C;
+}
+
+.header-title p {
+  font-size: 24px;
+  margin: 5px 0 0;
+  color: #A67B5B;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* CARD TENGAH */
+.container {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 248, 240, 0.92);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  margin: auto;
+}
+
+/* container lebar untuk view rentals / view table */
+.container.wide {
+  max-width: 900px; /* lebar penuh */
+}
+
+/* TITLE CARD */
+h2 {
+  color: #8B5E3C;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #8B5E3C;
+  margin-bottom: 15px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #A67B5B;
+  margin: 15px 0 20px;
+}
+
+/* TOMBOL */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* tombol menu hijau sage */
+button:not(.btn-back):not(.btn-delete) {
+  background: linear-gradient(135deg, #A3C293, #7DA77E);
+}
+
+button:not(.btn-back):not(.btn-delete):hover {
+  transform: scale(1.03);
+}
+
+/* tombol back hitam */
+.btn-back {
+  background: #333;
+}
+
+.btn-back:hover {
+  transform: scale(1.03);
+}
+
+/* tombol delete coklat */
+.btn-delete {
+  background: linear-gradient(135deg, #A0522D, #8B4513);
+}
+
+.btn-delete:hover {
+  transform: scale(1.03);
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background: #7DA77E;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    padding: 25px;
+  }
+  .header-title h1 {
+    font-size: 34px;
+  }
+  .header-title p {
+    font-size: 18px;
+  }
+}
+  </style>
+</head>
+<body>
+
+<!-- HEADER ATAS -->
+<div class="header-title">
+  <h1>ARUNIKA OUTDOOR</h1>
+  <p>Admin Rental Control Panel</p>
+</div>
+
+<!-- CARD -->
+<div class="container {% if mode == 'view_table' %}wide{% endif %}">
+
+<h2>Rents Management</h2>
+
+<!-- ===== MENU ===== -->
+{% if mode == "menu" %}
+
+<form action="/admin/rents">
+  <button name="mode" value="view_menu">[1] View All Rentals</button>
+</form>
+
+<form action="/admin/rents">
+  <button name="mode" value="delete">[2] Delete Rentals</button>
+</form>
+
+<form action="/admin">
+  <button class="btn-back">[0] Back</button>
+</form>
+
+{% endif %}
+
+<!-- ===== VIEW RENTALS ===== -->
+{% if mode == "view_menu" %}
+
+<h3>View Rentals</h3>
+
+<form action="/admin/rents" method="get">
+  <input type="hidden" name="mode" value="view_table">
+  <input type="hidden" name="status" value="all">
+  <button>View All Rentals</button>
+</form>
+
+<form action="/admin/rents" method="get">
+  <input type="hidden" name="mode" value="view_table">
+  <input type="hidden" name="status" value="active">
+  <button>View Active Rentals</button>
+</form>
+
+<form action="/admin/rents" method="get">
+  <input type="hidden" name="mode" value="view_table">
+  <input type="hidden" name="status" value="returned">
+  <button>View Returned Rentals</button>
+</form>
+
+<form action="/admin/rents" method="get">
+  <input type="hidden" name="mode" value="view_table">
+  <input type="hidden" name="status" value="cancelled">
+  <button>View Cancelled Rentals</button>
+</form>
+
+<form action="/admin/rents">
+  <button name="mode" value="menu" class="btn-back">Back</button>
+</form>
+
+{% endif %}
+
+<!-- ===== VIEW TABLE ===== -->
+{% if mode == "view_table" %}
+
+<h3>Rental Data</h3>
+
+<table>
+<tr>
+<th>Renter</th>
+<th>Status</th>
+<th>Equipment</th>
+<th>Qty</th>
+<th>Days</th>
+<th>Total</th>
+</tr>
+
+{% for r in rentals %}
+<tr>
+<td>{{r.renter}}</td>
+<td>{{r.status}}</td>
+<td>{{r.nama_barang}}</td>
+<td>{{r.jumlah}}</td>
+<td>{{r.lama_sewa}}</td>
+<td>Rp {{r.total_harga}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<br>
+
+<form action="/admin/rents">
+<button name="mode" value="view_menu" class="btn-back">Back</button>
+</form>
+
+{% endif %}
+
+<!-- ===== DELETE RENT ===== -->
+{% if mode == "delete" %}
+
+<h3>Delete Rental</h3>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Renter</th>
+<th>Equipment</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for r in rentals %}
+<tr>
+<td>{{r.id_transaksi}}</td>
+<td>{{r.renter}}</td>
+<td>{{r.nama_barang}}</td>
+<td>{{r.status}}</td>
+<td>
+{% if r.status != "active" %}
+<form method="POST" action="/admin/rents/delete">
+<input type="hidden" name="id_transaksi" value="{{r.id_transaksi}}">
+<input type="hidden" name="userid" value="{{r.userid}}">
+<input type="hidden" name="kode_barang" value="{{r.kode_barang}}">
+<button class="btn-delete">Delete</button>
+</form>
+{% else %}
+<span style="color:gray;">Active</span>
+{% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+
+<br>
+
+<form action="/admin/rents">
+<button class="btn-back">Back</button>
+</form>
+
+{% endif %}
+
+</div>
+</body>
+</html>

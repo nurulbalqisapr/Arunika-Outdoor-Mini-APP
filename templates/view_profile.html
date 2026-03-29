@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+  <title>My Profile - Arunika Outdoor</title>
+  <style>
+    /* BODY & BACKGROUND */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      background:
+        linear-gradient(rgba(255, 248, 240, 0.2), rgba(200, 170, 130, 0.2)),
+        url("{{ url_for('static', filename='img/arunika.jpg') }}");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* CARD TENGAH */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 248, 240, 0.92);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      margin: auto;
+      color: #555;
+    }
+
+    h1 {
+      color: #8B5E3C;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #8B5E3C;
+      margin-top: 25px;
+    }
+
+    .profile-item {
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .label {
+      font-weight: 500;
+      width: 150px;
+      display: inline-block;
+    }
+
+    /* BUTTONS */
+    .btn-back, .btn-update, .btn-danger {
+      border-radius: 20px;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn-back {
+      background: #333;
+      color: white;
+    }
+    .btn-back:hover { transform: scale(1.03); }
+
+    .btn-update {
+      background: linear-gradient(135deg, #A3C293, #7DA77E);
+      color: white;
+    }
+    .btn-update:hover { transform: scale(1.03); }
+
+    .btn-danger {
+      background: #f44336;
+      color: white;
+      border: none;
+    }
+    .btn-danger:hover { transform: scale(1.03); }
+
+    .actions {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>👤 MY PERSONAL DATA</h1>
+
+    <div class="profile-item"><span class="label">UserID:</span> {{ user.userid }}</div>
+    <div class="profile-item"><span class="label">Name:</span> {{ user.nama }}</div>
+    <div class="profile-item"><span class="label">Email:</span> {{ user.email }}</div>
+    <div class="profile-item"><span class="label">Gender:</span> {{ user.gender }}</div>
+    <div class="profile-item"><span class="label">Age:</span> {{ user.usia }}</div>
+    <div class="profile-item"><span class="label">Job:</span> {{ user.pekerjaan }}</div>
+    <div class="profile-item"><span class="label">Hobbies:</span> {{ user.hobi }}</div>
+    <div class="profile-item"><span class="label">Phone No:</span> {{ user.nohp }}</div>
+
+    <h3>Address</h3>
+    <div class="profile-item"><span class="label">City:</span> {{ user.kota }}</div>
+    <div class="profile-item"><span class="label">RT/RW:</span> {{ user.rt }}/{{ user.rw }}</div>
+    <div class="profile-item"><span class="label">Zip Code:</span> {{ user.zipc }}</div>
+
+    <h3>Coordinates</h3>
+    <div class="profile-item"><span class="label">Lat:</span> {{ user.lat }}</div>
+    <div class="profile-item"><span class="label">Lon:</span> {{ user.lon }}</div>
+
+    <div class="actions">
+      <h3>Account Menu</h3>
+      <a href="/user/profile/update" class="btn-update">Update Data (UserID & Password)</a>
+
+      <form action="/user/profile/delete" method="post" onsubmit="return confirm('WARNING: Account will be deleted permanently! Are you sure?');" style="display:inline">
+        <button type="submit" class="btn-danger">Delete Account</button>
+      </form>
+    </div>
+
+    <a href="/user" class="btn-back">Back</a>
+  </div>
+</body>
+</html>

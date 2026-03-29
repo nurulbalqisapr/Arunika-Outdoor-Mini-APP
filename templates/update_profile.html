@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+  <title>Update Personal Data - Arunika Outdoor</title>
+  <style>
+    /* BODY & BACKGROUND */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      background:
+        linear-gradient(rgba(255, 248, 240, 0.2), rgba(200, 170, 130, 0.2)),
+        url("{{ url_for('static', filename='img/arunika.jpg') }}");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* CARD TENGAH */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 248, 240, 0.92);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      margin: auto;
+      color: #555;
+    }
+
+    h1 {
+      color: #8B5E3C;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #8B5E3C;
+      margin-top: 20px;
+    }
+
+    .menu-item {
+      margin: 15px 0;
+    }
+
+    .label {
+      font-weight: 500;
+      display: inline-block;
+      width: 120px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* BUTTONS */
+    .btn, .btn-back {
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #A3C293, #7DA77E);
+      color: white;
+      border: none;
+    }
+    .btn:hover { transform: scale(1.03); }
+
+    .btn-back {
+      background: #333;
+      color: white;
+    }
+    .btn-back:hover { transform: scale(1.03); }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #A67B5B;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px;
+      }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✏️ UPDATE PERSONAL DATA</h1>
+
+    <h3>Data that can be changed:</h3>
+    <div class="menu-item"><span class="label">1. UserID:</span> {{ user.userid }}</div>
+    <div class="menu-item"><span class="label">2. Password:</span> ********</div>
+
+    <hr>
+
+    <h3>Update UserID</h3>
+    <form action="/user/profile/update_userid" method="post">
+      <label>Enter New UserID</label>
+      <input type="text" name="new_userid" required>
+      <br>
+      <button class="btn">Update UserID</button>
+    </form>
+
+    <h3>Update Password</h3>
+    <form action="/user/profile/update_password" method="post">
+      <label>Enter New Password</label>
+      <input type="password" name="new_password" required>
+      <br>
+      <button class="btn">Update Password</button>
+    </form>
+
+    <a href="/user/profile" class="btn-back">Back to Profile</a>
+  </div>
+</body>
+</html>
