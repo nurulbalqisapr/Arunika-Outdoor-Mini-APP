@@ -49,10 +49,10 @@ The system uses SQLite database integrated with Flask-SQLAlchemy.
 
 The overall workflow is quite straightforward:
 
-A user opens the application
-Logs in or registers
-Gets redirected based on their role
-Performs actions from their respective menu
+- A user opens the application
+- Logs in or registers
+- Gets redirected based on their role
+- Performs actions from their respective menu
 
 Admins manage the system behind the scenes, while renters interact with the rental process directly.
 
