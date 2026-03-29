@@ -94,6 +94,12 @@ Renter Menu
 
 ---
 
+## Tech Stack
+- Backend: Python, Flask
+- Database: SQLite (managed via Flask-SQLAlchemy)
+- Frontend: HTML templates (Jinja2)
+- Deployment: Ready for deployment with Gunicorn (Procfile included)
 
+---
 
 
