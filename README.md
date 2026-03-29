@@ -56,6 +56,8 @@ Performs actions from their respective menu
 
 Admins manage the system behind the scenes, while renters interact with the rental process directly.
 
+---
+
 ## Project Structure
 
 ```
