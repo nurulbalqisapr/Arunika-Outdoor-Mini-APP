@@ -1,11 +1,4 @@
 # Arunika-Outdoor-Mini-APP
-This project is a web-based rental management system developed using Flask (Python).  
-It is designed to manage equipment rental activities with two user roles: **Admin** and **Renter (User)**.
-
-The application allows renters to manage their rental activities, while admins handle equipment and monitor rental transactions.
-The system uses SQLite database integrated with Flask-SQLAlchemy.
-
----
 
 ## Features
 
@@ -44,3 +37,7 @@ The system uses SQLite database integrated with Flask-SQLAlchemy.
 8. Logout  
 
 ---
+
+
+
+
