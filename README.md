@@ -45,6 +45,27 @@ The system uses SQLite database integrated with Flask-SQLAlchemy.
 
 ---
 
+## Project Structure
+
+```
+project-folder/
+│
+├── app.py
+├── Database.py
+├── Equipment_Management.py
+├── Rents_Management.py
+├── Renter.py
+├── Profile.py
+├── Invoice.py
+├── Main_Menu.py
+├── Menu_Auth.py
+├── Validators.py
+│
+├── templates/
+├── static/
+├── instance/
+└── requirements.txt
+```
 
 
 
