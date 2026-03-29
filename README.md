@@ -66,6 +66,18 @@ project-folder/
 ├── instance/
 └── requirements.txt
 ```
+---
+
+## Workflow
+
+Authentication Menu
+<img width="4888" height="1707" alt="Authenthication" src="https://github.com/user-attachments/assets/15ef25fc-b012-4e43-a836-b44f651fe661" />
+
+Admin Menu 
+<img width="3414" height="2682" alt="admin menu" src="https://github.com/user-attachments/assets/d59ea1fd-b200-4ad5-8ebc-3c9dd7c764f1" />
+
+Renter Menu
+<img width="3554" height="2550" alt="renter menu" src="https://github.com/user-attachments/assets/a77d6112-52e9-4553-baf6-5d5018770f91" />
 
 
 
